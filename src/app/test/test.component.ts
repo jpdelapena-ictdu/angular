@@ -3,21 +3,23 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: '[app-test]',
   template: `
+            <div>
               Inline Template
-              <h2>{{2+2}}</h2>
+              <h2>{{name*name*name*name*name*name*name*name}}</h2>
               <h2>{{"Welcome " + name}}</h2>
+              <h2>{{name}}</h2>
               <h2>{{name.length}}</h2>
               <h2>{{name.toUpperCase()}}</h2>
               <h2>{{name.toLowerCase()}}</h2>
               <h2>{{greetUser()}}</h2>
               <br>
-              <h2 [class.text-danger]="hasError">{{"Welcome " + name}}</h2>
-              <h2 [class.text-special]="isSpecial">{{"Welcome " + name}}</h2>
-              <h2 [ngClass]="messageClasses">{{"Welcome " + name}}</h2>
+              <h2 [class.text-danger]="hasError">{{name}}</h2>
+              <h2 [class.text-special]="isSpecial">{{name}}</h2>
+              <h2 [ngClass]="messageClasses">{{name}}</h2>
               <br>
               <h2 [style.color]="hasError ? 'red' : 'green'">Style Binding</h2>
               <h2 [ngStyle]="titleStyles">Style Binding 2</h2>
-            
+            </div>
             <div>
               <input #myInput type="text" value="{{name}}">
               <input bind-disabled="isDisabled" id="{{myId}}" type="text" value="{{name}}">
@@ -28,7 +30,7 @@ import { Component, OnInit } from '@angular/core';
             <input [(ngModel)]="name" type="text">
             {{name}}
             `,
-            
+
   styles: [`
           .text-success{
             color: green;
