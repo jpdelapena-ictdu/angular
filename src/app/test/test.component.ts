@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: '[app-test]',
-  template: `<div>
+  template: `
               Inline Template
               <h2>{{2+2}}</h2>
               <h2>{{"Welcome " + name}}</h2>
@@ -17,11 +17,18 @@ import { Component, OnInit } from '@angular/core';
               <br>
               <h2 [style.color]="hasError ? 'red' : 'green'">Style Binding</h2>
               <h2 [ngStyle]="titleStyles">Style Binding 2</h2>
-            </div>
+            
             <div>
-              <input [id]="myId" type="text" value="{{name}}">
+              <input #myInput type="text" value="{{name}}">
               <input bind-disabled="isDisabled" id="{{myId}}" type="text" value="{{name}}">
-            </div> `,
+            </div> 
+            <button (click)="logMessage(myInput.value)">Greet</button>
+            <button (click)="onClick($event)">Greet</button>
+            {{greeting}}
+            <input [(ngModel)]="name" type="text">
+            {{name}}
+            `,
+            
   styles: [`
           .text-success{
             color: green;
@@ -37,7 +44,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
   
-  public name = "Paulo";
+  public name = "";
   public myId = "testID";
   public isDisabled = false;
   public hasError = false;
@@ -51,7 +58,7 @@ export class TestComponent implements OnInit {
     color: "blue",
     fontStyle: "italic"
   }
-
+  public greeting = "";
   constructor() { }
 
   ngOnInit() {
@@ -59,6 +66,16 @@ export class TestComponent implements OnInit {
 
   greetUser(){
     return "Hello " + this.name;
+  }
+
+  onClick(event){
+    console.log(event);
+    this.greeting = event.type;
+    this.hasError = this.hasError ? false : true;
+  }
+
+  logMessage(value){
+    console.log(value);
   }
 
 }
